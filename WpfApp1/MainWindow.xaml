@@ -1,0 +1,170 @@
+﻿<Window x:Class="EduCenterApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Центр Обучения" Height="650" Width="1000"
+        Background="#0F172A" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="DarkBg" Color="#1E293B"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#38BDF8"/>
+        <SolidColorBrush x:Key="TextColor" Color="#000000"/>
+
+        
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource DarkBg}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#475569"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="150"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="{StaticResource DarkBg}"/>
+            <Setter Property="Foreground" Value="Brown"/>
+            <Setter Property="RowBackground" Value="{StaticResource DarkBg}"/>
+            <Setter Property="AlternatingRowBackground" Value="#293548"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="AutoGenerateColumns" Value="True"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <TabControl Background="Transparent" BorderThickness="0" Margin="10">
+
+           
+            <TabItem Header="Слушатели">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <WrapPanel Grid.Row="0" Margin="10">
+                        <TextBlock Text="Имя:"/>
+                        <TextBox x:Name="txtNumeC"/>
+                        <TextBlock Text="Фамилия:"/>
+                        <TextBox x:Name="txtPrenumeC"/>
+                        <TextBlock Text="Телефон:"/>
+                        <TextBox x:Name="txtTelefonC"/>
+                        <TextBlock Text="Email:"/>
+                        <TextBox x:Name="txtEmailC"/>
+                        <Button Content="Добавить" Click="BtnAddCursant_Click"/>
+                        <Button Content="Изменить" Click="BtnUpdateCursant_Click"/>
+                        <Button Content="Удалить" Click="BtnDeleteCursant_Click" Background="#EF4444" Foreground="White"/>
+                        <TextBlock Text="  Поиск (Имя/Email):"/>
+                        <TextBox x:Name="txtSearchC" TextChanged="TxtSearchC_TextChanged"/>
+                    </WrapPanel>
+                    <DataGrid x:Name="GridCursanti" Grid.Row="1" SelectionChanged="GridCursanti_SelectionChanged"/>
+                    
+                </Grid>
+            </TabItem>
+
+            
+            <TabItem Header="Курсы">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <WrapPanel Grid.Row="0" Margin="10">
+                        <TextBlock Text="Название:"/>
+                        <TextBox x:Name="txtDenumire"/>
+                        <TextBlock Text="Преподаватель:"/>
+                        <TextBox x:Name="txtFormator"/>
+                        <TextBlock Text="Цена:"/>
+                        <TextBox x:Name="txtPret"/>
+                        <TextBlock Text="Дней:"/>
+                        <TextBox x:Name="txtDurata"/>
+                        <Button Content="Добавить" Click="BtnAddCurs_Click"/>
+                        <Button Content="Изменить" Click="BtnUpdateCurs_Click"/>
+                        <Button Content="Удалить" Click="BtnDeleteCurs_Click" Background="#EF4444" Foreground="White"/>
+                        <TextBlock Text="  Фильтр (Препод.):"/>
+                        <TextBox x:Name="txtSearchCurs" TextChanged="TxtSearchCurs_TextChanged"/>
+                    </WrapPanel>
+                    <DataGrid x:Name="GridCursuri" Grid.Row="1" SelectionChanged="GridCursuri_SelectionChanged"/>
+                </Grid>
+            </TabItem>
+
+            
+            <TabItem Header="Регистрации">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <WrapPanel Grid.Row="0" Margin="10">
+                        <TextBlock Text="Слушатель:"/>
+                        <ComboBox x:Name="cmbCursant" DisplayMemberPath="FullName" SelectedValuePath="IdCursant"/>
+                        <TextBlock Text="Курс:"/>
+                        <ComboBox x:Name="cmbCurs" DisplayMemberPath="Denumire" SelectedValuePath="IdCurs"/>
+                        <TextBlock Text="Статус:"/>
+                        <ComboBox x:Name="cmbStatus">
+                            <ComboBoxItem Content="Оплачено"/>
+                            <ComboBoxItem Content="Не оплачено"/>
+                        </ComboBox>
+                        <Button Content="Зарегистрировать" Click="BtnAddInscriere_Click"/>
+                        <Button Content="Отменить регистрацию" Click="BtnDeleteInscriere_Click" Background="#EF4444" Foreground="White"/>
+                    </WrapPanel>
+                    <DataGrid x:Name="GridInscrieri" Grid.Row="1"/>
+                </Grid>
+            </TabItem>
+
+          
+            <TabItem Header="Отчеты и Статистика">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Grid.Column="0">
+                        <WrapPanel DockPanel.Dock="Top" Margin="10">
+                            <Button Content="Обновить Отчет" Click="BtnLoadReport_Click"/>
+                            <Button Content="Экспорт в TXT" Click="BtnExportTXT_Click" Background="#22C55E"/>
+                        </WrapPanel>
+                        <DataGrid x:Name="GridReport" Margin="10"/>
+                    </DockPanel>
+
+                   
+                    <Border Grid.Column="1" Background="{StaticResource DarkBg}" CornerRadius="10" Margin="10" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="Общая статистика" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentColor}" Margin="0,0,0,20"/>
+
+                            <TextBlock Text="Всего слушателей:"/>
+                            <TextBlock x:Name="lblTotalStudents" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                            <TextBlock Text="Общая сумма оплат:"/>
+                            <TextBlock x:Name="lblTotalRevenue" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                            <TextBlock Text="Ср. чек на слушателя:"/>
+                            <TextBlock x:Name="lblAvgRevenue" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                            <TextBlock Text="Самый популярный курс:"/>
+                            <TextBlock x:Name="lblTopCourse" FontSize="18" FontWeight="Bold" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
